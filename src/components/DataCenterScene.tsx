@@ -52,7 +52,7 @@ const PARTS: Part[] = [
   { key: "ssd", from: [2.4, 1.4, 0.6], rot: [1.1, 0.2, 0.5], to: [0.75, -0.12, 0.55], window: [0.1, 0.22] },
   { key: "fan", from: [-0.4, 1.8, -0.6], rot: [1.2, 0.4, 0.3], to: [-0.55, 0.02, -0.55], window: [0.12, 0.24] },
   { key: "psu", from: [2.6, -0.9, 0.2], rot: [0.4, 0.9, 0.3], to: [1.0, -0.03, -0.45], window: [0.14, 0.26] },
-  { key: "switch", from: [0.9, 2.1, 1.0], rot: [0.6, 0.5, 0.4], to: [0, RACK_BOTTOM + (RACK_SLOTS - 0.5) * SLOT + 0.05, 0], window: [0.36, 0.5] },
+  { key: "switch", from: [1.6, 1.5, -0.4], rot: [0.6, 0.5, 0.4], to: [0, RACK_BOTTOM + (RACK_SLOTS - 0.5) * SLOT + 0.05, 0], window: [0.36, 0.5] },
 ];
 
 function PartMesh({ k }: { k: string }) {
@@ -275,6 +275,7 @@ function Scene({ progress, reduced }: Props) {
         lerp(part.from[2], part.to[2], k),
       );
       g.rotation.set(part.rot[0] * (1 - k), part.rot[1] * (1 - k) + (reduced ? 0 : (1 - k) * t * 0.2), part.rot[2] * (1 - k));
+      if (part.key === "switch") g.scale.setScalar(lerp(0.35, 1, k));
       g.visible = part.key === "switch" || p < 0.55;
     });
 
