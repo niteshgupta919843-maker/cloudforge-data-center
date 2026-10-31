@@ -275,7 +275,7 @@ function Scene({ progress, reduced }: Props) {
         lerp(part.from[2], part.to[2], k),
       );
       g.rotation.set(part.rot[0] * (1 - k), part.rot[1] * (1 - k) + (reduced ? 0 : (1 - k) * t * 0.2), part.rot[2] * (1 - k));
-      if (part.key === "switch") { g.scale.setScalar(lerp(0.35, 1, k)); (window as unknown as { __dbg: unknown }).__dbg = [k, g.scale.x, g.position.toArray()]; }
+      if (part.key === "switch") { g.scale.setScalar(lerp(0.35, 1, k)); const out: unknown[] = []; state.scene.traverseVisible((o) => { if ((o as THREE.Mesh).isMesh) { const b = new THREE.Box3().setFromObject(o); const s = b.getSize(new THREE.Vector3()); if (s.x * s.y * s.z > 0.3) out.push([o.parent?.type, s.toArray().map((n) => n.toFixed(2)), b.getCenter(new THREE.Vector3()).toArray().map((n) => n.toFixed(1))]); } }); (window as unknown as { __dbg: unknown }).__dbg = out; }
       g.visible = part.key === "switch" || p < 0.55;
     });
 
