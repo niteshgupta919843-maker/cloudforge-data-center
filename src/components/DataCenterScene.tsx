@@ -275,7 +275,7 @@ function Scene({ progress, reduced }: Props) {
         lerp(part.from[2], part.to[2], k),
       );
       g.rotation.set(part.rot[0] * (1 - k), part.rot[1] * (1 - k) + (reduced ? 0 : (1 - k) * t * 0.2), part.rot[2] * (1 - k));
-      if (part.key === "switch") g.scale.setScalar(lerp(0.35, 1, k));
+      if (part.key === "switch") { g.scale.setScalar(lerp(0.35, 1, k)); (window as unknown as { __dbg: unknown }).__dbg = [k, g.scale.x, g.position.toArray()]; }
       g.visible = part.key === "switch" || p < 0.55;
     });
 
