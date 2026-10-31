@@ -35,7 +35,7 @@ export function BuildSequence() {
 
   useEffect(() => {
     if (reduced) {
-      progress.current = STAGES[stage].at;
+      progress.current = STAGES[stage]!.at;
       return;
     }
     let killed = false;
@@ -67,16 +67,16 @@ export function BuildSequence() {
   const goTo = (i: number) => {
     setStage(i);
     if (reduced || !sectionRef.current) {
-      progress.current = STAGES[i].at;
+      progress.current = STAGES[i]!.at;
       return;
     }
     const el = sectionRef.current;
     const top = el.getBoundingClientRect().top + window.scrollY;
     const range = el.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: top + range * STAGES[i].at, behavior: "smooth" });
+    window.scrollTo({ top: top + range * STAGES[i]!.at, behavior: "smooth" });
   };
 
-  const s = STAGES[stage];
+  const s = STAGES[stage]!;
 
   return (
     <section
