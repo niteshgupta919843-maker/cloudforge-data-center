@@ -247,8 +247,8 @@ function Scene({ progress, reduced }: Props) {
 
   const cams = useMemo(
     () => [
-      { p: 0, pos: [0, 0.8, 6.5], look: [0, 0, 0] },
-      { p: 0.3, pos: [2.2, 2.2, 5.2], look: [0, -0.1, 0] },
+      { p: 0, pos: [0, 0.6, 10], look: [0, 0, 0] },
+      { p: 0.3, pos: [2.6, 2.4, 6.8], look: [0, -0.1, 0] },
       { p: 0.62, pos: [5.5, 2.5, 9.5], look: [0, 0.3, 0] },
       { p: 1, pos: [13, 9, 17], look: [0, 0, -3] },
     ],
@@ -275,7 +275,7 @@ function Scene({ progress, reduced }: Props) {
         lerp(part.from[2], part.to[2], k),
       );
       g.rotation.set(part.rot[0] * (1 - k), part.rot[1] * (1 - k) + (reduced ? 0 : (1 - k) * t * 0.2), part.rot[2] * (1 - k));
-      if (part.key === "switch") { g.scale.setScalar(lerp(0.35, 1, k)); const out: unknown[] = []; state.scene.traverseVisible((o) => { if ((o as THREE.Mesh).isMesh) { const b = new THREE.Box3().setFromObject(o); const s = b.getSize(new THREE.Vector3()); if (s.x * s.y * s.z > 0.3) out.push([o.parent?.type, s.toArray().map((n) => n.toFixed(2)), b.getCenter(new THREE.Vector3()).toArray().map((n) => n.toFixed(1))]); } }); (window as unknown as { __dbg: unknown }).__dbg = out; }
+      if (part.key === "switch") g.scale.setScalar(lerp(0.3, 1, k));
       g.visible = part.key === "switch" || p < 0.55;
     });
 
@@ -438,7 +438,7 @@ export default function DataCenterScene({ progress, reduced }: Props) {
   return (
     <Canvas
       dpr={mobile ? [1, 1.25] : [1, 1.75]}
-      camera={{ fov: mobile ? 55 : 42, position: [0, 0.8, 6.5], near: 0.1, far: 80 }}
+      camera={{ fov: mobile ? 55 : 42, position: [0, 0.6, 10], near: 0.1, far: 80 }}
       gl={{ antialias: !mobile, powerPreference: "high-performance" }}
       aria-hidden="true"
     >
