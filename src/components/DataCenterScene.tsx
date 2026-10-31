@@ -310,12 +310,14 @@ function Scene({ progress, reduced }: Props) {
     });
 
     // camera keyframes
-    let a = cams[0];
-    let b = cams[cams.length - 1];
-    for (let i = 0; i < cams.length - 1; i++) {
-      if (p >= cams[i].p && p <= cams[i + 1].p) {
-        a = cams[i];
-        b = cams[i + 1];
+    type Cam = { p: number; pos: [number, number, number]; look: [number, number, number] };
+    const cl = cams as Cam[];
+    let a = cl[0]!;
+    let b = cl[cl.length - 1]!;
+    for (let i = 0; i < cl.length - 1; i++) {
+      if (p >= cl[i]!.p && p <= cl[i + 1]!.p) {
+        a = cl[i]!;
+        b = cl[i + 1]!;
         break;
       }
     }
@@ -369,7 +371,7 @@ function Scene({ progress, reduced }: Props) {
           [1.55, -0.95],
           [-1.55, 0.95],
           [1.55, 0.95],
-        ].map(([x, z]) => (
+        ].map(([x = 0, z = 0]) => [x, z] as const).map(([x, z]) => (
           <mesh key={`${x}${z}`} position={[x, RACK_BOTTOM + (RACK_SLOTS * SLOT) / 2, z]}>
             <boxGeometry args={[0.08, RACK_SLOTS * SLOT + 0.3, 0.08]} />
             <meshStandardMaterial color="#5b6b85" metalness={0.9} roughness={0.3} />
