@@ -157,7 +157,7 @@ function StorageScene() {
   return (
     <group>
       {[0.32, 0.02, -0.28].map((y, i) => (
-        <group key={y} position={[0, y, 0]} ref={i === 2 ? spin : undefined}>
+        <group key={y} position={[0, y, 0]} ref={i === 2 ? spin : null}>
           <mesh rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.55, 0.55, 0.14, 28]} />
             <meshStandardMaterial color={i === 1 ? CHASSIS : "#3a4660"} metalness={0.8} roughness={0.3} />
