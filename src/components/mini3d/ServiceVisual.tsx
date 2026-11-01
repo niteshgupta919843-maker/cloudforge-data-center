@@ -19,7 +19,7 @@ export function ServiceVisual({ kind, className = "" }: { kind: VisualKind; clas
     if (!el) return;
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           setMounted(true);
           setVisible(true);
         } else {
