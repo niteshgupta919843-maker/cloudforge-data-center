@@ -1,0 +1,1 @@
+GRANT ALL ON public.contact_inquiries TO service_role;

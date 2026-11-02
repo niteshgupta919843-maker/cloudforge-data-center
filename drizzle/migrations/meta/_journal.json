@@ -15,6 +15,13 @@
       "when": 1793515514986,
       "tag": "0001_allow_authenticated_inquiry_inserts",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793600231185,
+      "tag": "0002_grant_contact_inquiries",
+      "breakpoints": true
     }
   ]
 }
